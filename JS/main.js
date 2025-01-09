@@ -16,21 +16,22 @@ const tasks = [
   function renderTask () {
     taskList.innerHTML = "" ;
     for (const task of tasks) {
-       taskList.innerHTML += `<li class="js-list-title"> ${task.name} </li>`;
-
-    const listItem = document.querySelector (".js-list-title");
-    if (task.completed === true) {
-        listItem.classList.add ("tachado");
-        }
-        else{
-            listItem.classList.remove ("tachado"); 
-        }
+      if (task.completed === true) {
+        taskList.innerHTML += `<li class='tachado'> ${task.name} </li>`;
+      } else{
+          taskList.innerHTML += `<li> ${task.name} </li>`;
+        }    
     }
+  }
 
-}
-
-  renderTask();
+renderTask();
 
   
 
  // .tachado
+
+ /*
+ 
+Añadir un checkbox a cada tarea. Cada tarea en nuestra lista tendrá un checkbox, tal como se muestra en la imagen del enunciado. Este checkbox estará marcado si la tarea está completada y desmarcado si no lo está.
+
+ */
