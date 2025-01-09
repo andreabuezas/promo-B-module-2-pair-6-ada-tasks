@@ -17,18 +17,21 @@ const tasks = [
     taskList.innerHTML = "" ;
     for (const task of tasks) {
       if (task.completed === true) {
-        taskList.innerHTML += `<li class='tachado'> ${task.name} </li>`;
+        taskList.innerHTML += `<li class='tachado'>
+        <input type="checkbox" checked>
+        ${task.name} 
+        </li>`;
       } else{
-          taskList.innerHTML += `<li> ${task.name} </li>`;
+          taskList.innerHTML += `<li>
+          <input type="checkbox">
+          ${task.name}
+          </li>`;
         }    
     }
   }
 
 renderTask();
 
-  
-
- // .tachado
 
  /*
  
