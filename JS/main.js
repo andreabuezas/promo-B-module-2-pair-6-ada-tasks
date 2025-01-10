@@ -40,14 +40,12 @@ const handleClickList = (event) => {
   const taskId = parseInt(event.target.id);
   if (!taskId) {
     return
-  } else {
-    for (const task of tasks) {
-      const checkedTask = tasks.find((task) => task.id === taskId);
-      console.log(checkedTask);
-
-    }
+  } 
     
-  }
+  const checkedTask = tasks.findIndex((task) => task.id === taskId);
+  tasks[checkedTask].completed = true;
+  console.log(tasks[checkedTask]);
+  renderTask();
 
 };
 
