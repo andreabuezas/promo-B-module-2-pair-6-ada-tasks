@@ -13,9 +13,9 @@ const tasks = [
     },
   ];
 
-  function renderTask () {
+  function renderTask (taskArray) {
     taskList.innerHTML = "" ;
-    for (const task of tasks) {
+    for (const task of taskArray) {
       if (task.completed === true) {
         taskList.innerHTML += `<li class='tachado'>
         <input type="checkbox" id='${task.id}' checked>
@@ -30,11 +30,14 @@ const tasks = [
     }
   }
 
-renderTask();
+renderTask(tasks);
 
-// Busca la tarea que tenga el id `taskId` en el array `tasks`
-// Una vez que has obtenido la tarea, actualiza la propiedad `completed`
-// Pinta de nuevo las tareas en el html
+/*
+Cuando la usuaria marque una tarea como completada (evento):
+Busca la tarea que tenga el id `taskId` en el array `tasks`
+Una vez que has obtenido la tarea, actualiza la propiedad `completed`
+Pinta de nuevo las tareas en el html
+*/
 
 const handleClickList = (event) => {
   const taskId = parseInt(event.target.id);
@@ -44,13 +47,36 @@ const handleClickList = (event) => {
     
   const checkedTask = tasks.findIndex((task) => task.id === taskId);
   tasks[checkedTask].completed = true;
-  console.log(tasks[checkedTask]);
   renderTask();
 
 };
 
 taskList.addEventListener('click', handleClickList);
 
+
+/*
+Filtrar tareas:
+
+Crea un evento asociado al botón de buscar de la interfaz gráfica.
+Crea la función manejadora del evento anterior.
+
+Dentro de esta función:
+Obtén el valor del input de filtrar.
+Filtra las tareas que coinciden con el valor introducido por el usuario.
+Vuelve a pintar las tareas, esta vez utilizando el listado filtrado.
+*/
+
+const searchBtn = document.querySelector('.js-btn-filter');
+const filterInput = document.querySelector('.js-text-task-filter');
+
+function handleClickSearch (ev) {
+  ev.preventDefault();
+  let searchValue = filterInput.value;
+  const filteredTasks = tasks.filter ((task) => task.name.toLowerCase().includes(searchValue.toLowerCase()));
+  renderTask(filteredTasks);
+}
+
+searchBtn.addEventListener('click', handleClickSearch);
 
 
 
