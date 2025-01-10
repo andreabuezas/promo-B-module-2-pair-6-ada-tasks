@@ -47,7 +47,7 @@ const handleClickList = (event) => {
     
   const checkedTask = tasks.findIndex((task) => task.id === taskId);
   tasks[checkedTask].completed = true;
-  renderTask();
+  renderTask(tasks);
 
 };
 
