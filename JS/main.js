@@ -2,6 +2,7 @@
 
 const taskList = document.querySelector (".js-tasklist");
 
+/*
 const tasks = [
     { name: "Recoger setas en el campo", completed: true, id: 1 },
     { name: "Comprar pilas", completed: true, id: 2 },
@@ -12,6 +13,17 @@ const tasks = [
       id: 4,
     },
   ];
+  */
+
+  let tasks = [];
+  
+  fetch(SERVER_URL)
+  .then((response) => response.json())
+  .then((data) => {
+    const task = data.results;
+    
+  }
+
 
   function renderTask (taskArray) {
     taskList.innerHTML = "" ;
@@ -79,6 +91,8 @@ function handleClickSearch (ev) {
 searchBtn.addEventListener('click', handleClickSearch);
 
 
+const GITHUB_USER = "<andreabuezas>";
+const SERVER_URL = `https://dev.adalab.es/api/todo/${GITHUB_USER}´;
 
 
   
