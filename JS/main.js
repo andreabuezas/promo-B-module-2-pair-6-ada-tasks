@@ -1,6 +1,8 @@
 "use strict" ;
 
 const taskList = document.querySelector (".js-tasklist");
+const GITHUB_USER = "Nymesia47";
+const SERVER_URL = `https://dev.adalab.es/api/todo/${GITHUB_USER}`;
 
 /*
 const tasks = [
@@ -20,9 +22,10 @@ const tasks = [
   fetch(SERVER_URL)
   .then((response) => response.json())
   .then((data) => {
-    const task = data.results;
-    
-  }
+    const tasks = data.results;
+    renderTask(tasks);
+ 
+  });
 
 
   function renderTask (taskArray) {
@@ -91,8 +94,4 @@ function handleClickSearch (ev) {
 searchBtn.addEventListener('click', handleClickSearch);
 
 
-const GITHUB_USER = "<andreabuezas>";
-const SERVER_URL = `https://dev.adalab.es/api/todo/${GITHUB_USER}´;
 
-
-  
