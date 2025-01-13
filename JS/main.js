@@ -1,6 +1,7 @@
 "use strict" ;
 
 const taskList = document.querySelector (".js-tasklist");
+let msg = document.querySelector('.js-msg');
 const GITHUB_USER = "Nymesia47";
 const SERVER_URL = `https://dev.adalab.es/api/todo/${GITHUB_USER}`;
 
@@ -24,6 +25,7 @@ const tasks = [
   .then((data) => {
     const tasks = data.results;
     renderTask(tasks);
+    msg.innerHTML = `Tienes ${tasks.length()}`
  
   });
 
