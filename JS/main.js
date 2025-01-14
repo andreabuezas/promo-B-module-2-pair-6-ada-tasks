@@ -5,34 +5,40 @@ let msg = document.querySelector('.js-msg');
 const GITHUB_USER = "Nymesia47";
 const SERVER_URL = `https://dev.adalab.es/api/todo/${GITHUB_USER}`;
 
-/*
-const tasks = [
-    { name: "Recoger setas en el campo", completed: true, id: 1 },
-    { name: "Comprar pilas", completed: true, id: 2 },
-    { name: "Poner una lavadora de blancos", completed: true, id: 3 },
-    {
-      name: "Aprender cómo se realizan las peticiones al servidor en JavaScript",
-      completed: false,
-      id: 4,
-    },
-  ];
-  */
 
   let tasks = [];
+  let completedTasks = [];
+  let toDoTasks = [];
+
+
+  function countCompletedTasks(array) {
+    completedTasks = array.filter((task) => task.completed === true);   
+  }
+
+  function countToDoTasks(array) {
+    toDoTasks = array.filter((task) => task.completed !== true);
+
+  }
+
   
   fetch(SERVER_URL)
   .then((response) => response.json())
   .then((data) => {
     const tasks = data.results;
+
     renderTask(tasks);
-    msg.innerHTML = `Tienes ${tasks.length()}`
+    countCompletedTasks(tasks);
+    countToDoTasks(tasks);
+    msg.innerHTML = `Tienes ${tasks.length} tareas. ${completedTasks.length} completada y ${toDoTasks.length} por realizar.`
  
   });
 
 
-  function renderTask (taskArray) {
+  //Pintar Tareas
+
+  function renderTask (array) {
     taskList.innerHTML = "" ;
-    for (const task of taskArray) {
+    for (const task of array) {
       if (task.completed === true) {
         taskList.innerHTML += `<li class='tachado'>
         <input type="checkbox" id='${task.id}' checked>
@@ -49,7 +55,11 @@ const tasks = [
 
 renderTask(tasks);
 
+
+
 /*
+Completar tarea:
+
 Cuando la usuaria marque una tarea como completada (evento):
 Busca la tarea que tenga el id `taskId` en el array `tasks`
 Una vez que has obtenido la tarea, actualiza la propiedad `completed`
@@ -65,6 +75,9 @@ const handleClickList = (event) => {
   const checkedTask = tasks.findIndex((task) => task.id === taskId);
   tasks[checkedTask].completed = true;
   renderTask(tasks);
+  // countCompletedTasks(tasks);
+  // countToDoTasks(tasks);
+  // msg.innerHTML = `Tienes ${tasks.length} tareas. ${completedTasks.length} completada y ${toDoTasks.length} por realizar.`
 
 };
 
