@@ -24,7 +24,7 @@ const SERVER_URL = `https://dev.adalab.es/api/todo/${GITHUB_USER}`;
   fetch(SERVER_URL)
   .then((response) => response.json())
   .then((data) => {
-    const tasks = data.results;
+    tasks = data.results;
 
     renderTask(tasks);
     countCompletedTasks(tasks);
@@ -73,11 +73,15 @@ const handleClickList = (event) => {
   } 
     
   const checkedTask = tasks.findIndex((task) => task.id === taskId);
+  console.log(checkedTask);
+  console.log(tasks);
+  console.log(taskId);
   tasks[checkedTask].completed = true;
+
   renderTask(tasks);
-  // countCompletedTasks(tasks);
-  // countToDoTasks(tasks);
-  // msg.innerHTML = `Tienes ${tasks.length} tareas. ${completedTasks.length} completada y ${toDoTasks.length} por realizar.`
+  countCompletedTasks(tasks);
+  countToDoTasks(tasks);
+  msg.innerHTML = `Tienes ${tasks.length} tareas. ${completedTasks.length} completada y ${toDoTasks.length} por realizar.`
 
 };
 
